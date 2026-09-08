@@ -1,730 +1,958 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fabián Bartolo — QA · Infraestructura · Observabilidad</title>
-<meta name="description" content="Portafolio de Fabián Andrés Bartolo Álvarez — QA Analyst, IAM & Observabilidad TI, Medellín, Colombia.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#080b14;
-    --bg-panel:#0f1524;
-    --bg-panel-alt:#141b2d;
-    --line: rgba(230,236,248,0.09);
-    --line-strong: rgba(230,236,248,0.16);
-    --text:#e7ecf5;
-    --text-muted:#8894ac;
-    --text-faint:#5b6580;
-    --teal:#49d6c4;
-    --teal-dim: rgba(73,214,196,0.14);
-    --amber:#f2ad42;
-    --amber-dim: rgba(242,173,66,0.14);
-    --rose:#ff7a7a;
-    --font-head: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace;
-    --maxw: 1120px;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabián Andrés Bartolo | QA Engineer & Infrastructure Specialist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--font-body);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  ::selection{ background:var(--teal); color:#04140f; }
+        :root {
+            --primary: #00d4ff;
+            --secondary: #0099cc;
+            --dark: #0a0e27;
+            --darker: #050814;
+            --light: #ffffff;
+            --gray: #b0b0b0;
+            --accent: #ff6b6b;
+        }
 
-  a{color:inherit;}
-  img{max-width:100%; display:block;}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+        /* Navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
+        }
 
-  /* background grid texture */
-  .grid-bg{
-    position:fixed; inset:0; z-index:-2;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity:0.35;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
-  }
-  .glow{
-    position:fixed; z-index:-1; top:-200px; left:50%; transform:translateX(-50%);
-    width:900px; height:600px; border-radius:50%;
-    background: radial-gradient(circle, rgba(73,214,196,0.12) 0%, transparent 65%);
-    pointer-events:none;
-  }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
 
-  /* progress bar */
-  #progress{
-    position:fixed; top:0; left:0; height:2px; width:0%;
-    background:linear-gradient(90deg, var(--teal), var(--amber));
-    z-index:200; transition:width 0.08s linear;
-  }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
 
-  /* nav */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    backdrop-filter: blur(10px);
-    background: rgba(8,11,20,0.72);
-    border-bottom:1px solid var(--line);
-  }
-  nav{
-    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .brand{
-    font-family:var(--font-mono); font-size:14px; letter-spacing:0.02em;
-    display:flex; align-items:center; gap:9px; color:var(--text);
-  }
-  .dot-live{
-    width:8px; height:8px; border-radius:50%; background:var(--teal);
-    box-shadow:0 0 0 0 rgba(73,214,196,0.6);
-    animation: pulse 2.2s infinite;
-  }
-  @keyframes pulse{
-    0%{ box-shadow:0 0 0 0 rgba(73,214,196,0.55); }
-    70%{ box-shadow:0 0 0 8px rgba(73,214,196,0); }
-    100%{ box-shadow:0 0 0 0 rgba(73,214,196,0); }
-  }
-  .navlinks{ display:flex; gap:28px; font-size:14px; color:var(--text-muted); }
-  .navlinks a{ text-decoration:none; position:relative; padding-bottom:4px; transition:color .2s;}
-  .navlinks a:hover, .navlinks a.active{ color:var(--text); }
-  .navlinks a.active::after{
-    content:''; position:absolute; bottom:-2px; left:0; right:0; height:2px; background:var(--teal);
-  }
-  .nav-cta{
-    font-family:var(--font-mono); font-size:13px; padding:8px 14px;
-    border:1px solid var(--line-strong); border-radius:6px; text-decoration:none;
-    color:var(--text); transition: border-color .2s, background .2s;
-  }
-  .nav-cta:hover{ border-color:var(--teal); background:var(--teal-dim); }
-  .navtoggle{ display:none; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
-  /* section shell */
-  section{ padding:120px 0 40px; position:relative; }
-  section:first-of-type{ padding-top:170px; }
-  .kicker{
-    font-family:var(--font-mono); font-size:13px; color:var(--teal);
-    display:flex; align-items:center; gap:8px; margin-bottom:16px;
-  }
-  .kicker::before{ content:'$'; color:var(--text-faint); }
-  h2.title{
-    font-family:var(--font-head); font-weight:600; font-size:clamp(28px,4vw,40px);
-    margin:0 0 44px; letter-spacing:-0.01em;
-  }
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
 
-  /* reveal */
-  [data-reveal]{ opacity:0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
-  [data-reveal].is-visible{ opacity:1; transform:none; }
-  [data-reveal="stagger"] > *{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
-  [data-reveal="stagger"].is-visible > *{ opacity:1; transform:none; }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
 
-  /* HERO */
-  .hero{ min-height:88vh; display:flex; align-items:center; }
-  .hero-grid{ display:grid; grid-template-columns: 1.15fr 0.85fr; gap:56px; align-items:center; }
-  .status-pill{
-    display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:12.5px;
-    color:var(--teal); background:var(--teal-dim); border:1px solid rgba(73,214,196,0.35);
-    padding:6px 12px; border-radius:100px; margin-bottom:26px;
-  }
-  .hero h1{
-    font-family:var(--font-head); font-size:clamp(38px,5.4vw,64px); line-height:1.04;
-    margin:0 0 18px; font-weight:600; letter-spacing:-0.015em;
-  }
-  .hero h1 .last{ color:var(--text-muted); }
-  .hero p.lead{
-    font-size:18px; color:var(--text-muted); max-width:52ch; margin:0 0 34px;
-  }
-  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:56px; }
-  .btn{
-    font-family:var(--font-body); font-weight:600; font-size:14.5px; padding:13px 22px;
-    border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
-    transition: transform .15s ease, background .2s, border-color .2s;
-  }
-  .btn-primary{ background:var(--teal); color:#04140f; border:1px solid var(--teal); }
-  .btn-primary:hover{ transform:translateY(-2px); }
-  .btn-ghost{ border:1px solid var(--line-strong); color:var(--text); }
-  .btn-ghost:hover{ border-color:var(--text-muted); transform:translateY(-2px); }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
 
-  .stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line); }
-  .stat{ padding:20px 18px 0 0; border-right:1px solid var(--line); }
-  .stat:last-child{ border-right:none; }
-  .stat .num{
-    font-family:var(--font-mono); font-size:26px; font-weight:600; color:var(--text);
-  }
-  .stat .num .unit{ font-size:15px; color:var(--teal); }
-  .stat .label{ font-size:12.5px; color:var(--text-faint); margin-top:4px; }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
-  /* hero chart panel */
-  .panel{
-    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
-    overflow:hidden;
-  }
-  .chart-panel .panel-head{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:13px 16px; border-bottom:1px solid var(--line);
-    font-family:var(--font-mono); font-size:12px; color:var(--text-faint);
-  }
-  .panel-head .traffic{ display:flex; gap:6px; }
-  .traffic span{ width:8px; height:8px; border-radius:50%; background:var(--line-strong); }
-  .chart-panel svg{ display:block; width:100%; height:auto; }
-  .chart-panel .panel-foot{
-    display:flex; justify-content:space-between; padding:12px 16px; border-top:1px solid var(--line);
-    font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint);
-  }
-  .chart-line{
-    stroke:var(--teal); stroke-width:2; fill:none;
-    stroke-dasharray: 900; stroke-dashoffset:900;
-    animation: draw 2.4s ease forwards 0.4s;
-  }
-  .chart-line-2{
-    stroke: var(--amber); stroke-width:1.5; fill:none; opacity:0.55;
-    stroke-dasharray: 900; stroke-dashoffset:900;
-    animation: draw 2.4s ease forwards 0.7s;
-  }
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
 
-  /* ABOUT */
-  .about-grid{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:56px; align-items:start; }
-  .about-text p{ color:var(--text-muted); font-size:16.5px; margin:0 0 18px; max-width:62ch; }
-  .about-text strong{ color:var(--text); font-weight:600; }
-  .id-card{ font-family:var(--font-mono); font-size:13px; }
-  .id-card .row{ display:flex; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--line); color:var(--text-muted); }
-  .id-card .row:last-child{ border-bottom:none; }
-  .id-card .row span:last-child{ color:var(--text); text-align:right; }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-  /* SKILLS */
-  .skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  .skill-card{
-    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px; padding:22px;
-    transition: border-color .2s, transform .2s;
-  }
-  .skill-card:hover{ border-color:var(--line-strong); transform:translateY(-3px); }
-  .skill-card .head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
-  .skill-card h3{ font-family:var(--font-head); font-size:16px; margin:0; font-weight:600; }
-  .status-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-  .status-dot.ok{ background:var(--teal); }
-  .status-dot.learning{ background:var(--amber); }
-  .status-line{ font-family:var(--font-mono); font-size:10.5px; color:var(--text-faint); margin-bottom:12px; }
-  .tags{ display:flex; flex-wrap:wrap; gap:6px; }
-  .tag{
-    font-size:12px; padding:4px 9px; border-radius:5px; background:var(--bg-panel-alt);
-    border:1px solid var(--line); color:var(--text-muted); font-family:var(--font-mono);
-  }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
 
-  /* EXPERIENCE timeline */
-  .timeline{ position:relative; padding-left:32px; }
-  .timeline::before{
-    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
-    background:var(--line);
-  }
-  .timeline-progress{
-    position:absolute; left:5px; top:6px; width:1px; background:var(--teal);
-    height:0%; transition:height .1s linear;
-  }
-  .tl-item{ position:relative; padding-bottom:52px; }
-  .tl-item:last-child{ padding-bottom:0; }
-  .tl-dot{
-    position:absolute; left:-32px; top:4px; width:11px; height:11px; border-radius:50%;
-    background:var(--bg); border:2px solid var(--line-strong);
-  }
-  .tl-item.is-visible .tl-dot{ border-color:var(--teal); background:var(--teal); }
-  .tl-date{ font-family:var(--font-mono); font-size:12px; color:var(--teal); margin-bottom:6px; }
-  .tl-role{ font-family:var(--font-head); font-size:19px; font-weight:600; margin:0 0 3px; }
-  .tl-co{ color:var(--text-muted); font-size:14px; margin-bottom:14px; }
-  .tl-bullets{ margin:0 0 14px; padding-left:18px; color:var(--text-muted); font-size:14.5px; }
-  .tl-bullets li{ margin-bottom:6px; }
-  .tl-metric{
-    display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:12.5px;
-    background:var(--teal-dim); border:1px solid rgba(73,214,196,0.3); color:var(--teal);
-    padding:7px 12px; border-radius:6px;
-  }
-  .tl-more summary{ cursor:pointer; color:var(--text-faint); font-size:13px; margin-top:14px; font-family:var(--font-mono); }
-  .tl-more[open] summary{ color:var(--text-muted); }
-  .tl-more ul{ margin-top:10px; }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-  /* EDU + CERTS */
-  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-  .list-card{ background:var(--bg-panel); border:1px solid var(--line); border-radius:12px; padding:26px; }
-  .list-card h3{ font-family:var(--font-head); font-size:16px; margin:0 0 18px; display:flex; align-items:center; gap:8px;}
-  .list-card ul{ list-style:none; margin:0; padding:0; }
-  .list-card li{ padding:12px 0; border-top:1px solid var(--line); font-size:14px; }
-  .list-card li:first-child{ border-top:none; }
-  .list-card .entry-title{ color:var(--text); font-weight:500; }
-  .list-card .entry-meta{ color:var(--text-faint); font-family:var(--font-mono); font-size:12px; margin-top:2px; }
-  .badge-pending{
-    font-family:var(--font-mono); font-size:10px; color:var(--amber); background:var(--amber-dim);
-    padding:2px 7px; border-radius:4px; margin-left:8px; vertical-align:middle;
-  }
+        .hero h2 {
+            font-size: 1.8rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
 
-  .lang-row{ margin-bottom:18px; }
-  .lang-row:last-child{ margin-bottom:0; }
-  .lang-head{ display:flex; justify-content:space-between; font-size:14px; margin-bottom:7px; }
-  .lang-head span:last-child{ color:var(--text-faint); font-family:var(--font-mono); font-size:12px; }
-  .bar-track{ height:5px; border-radius:3px; background:var(--bg-panel-alt); overflow:hidden; }
-  .bar-fill{ height:100%; background:var(--teal); width:0%; transition:width 1.4s ease; border-radius:3px; }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
 
-  /* CONTACT */
-  .contact-panel{
-    background:linear-gradient(180deg, var(--bg-panel), var(--bg-panel-alt));
-    border:1px solid var(--line); border-radius:16px; padding:52px; text-align:center;
-  }
-  .contact-panel h2{
-    font-family:var(--font-head); font-size:clamp(26px,3.6vw,38px); margin:0 0 14px; font-weight:600;
-  }
-  .contact-panel p{ color:var(--text-muted); max-width:48ch; margin:0 auto 30px; }
-  .contact-links{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
-  .clink{
-    display:flex; align-items:center; gap:9px; padding:12px 18px; border:1px solid var(--line-strong);
-    border-radius:9px; text-decoration:none; font-size:14px; color:var(--text);
-    transition:border-color .2s, background .2s, transform .2s;
-  }
-  .clink:hover{ border-color:var(--teal); background:var(--teal-dim); transform:translateY(-2px); }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-  footer{
-    padding:36px 0 50px; text-align:center; font-family:var(--font-mono); font-size:12px; color:var(--text-faint);
-  }
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
 
-  /* responsive */
-  @media (max-width:900px){
-    .hero-grid, .about-grid{ grid-template-columns:1fr; }
-    .skills-grid{ grid-template-columns:repeat(2,1fr); }
-    .two-col{ grid-template-columns:1fr; }
-    .stat-row{ grid-template-columns:repeat(2,1fr); row-gap:20px; }
-    .stat:nth-child(2n){ border-right:none; }
-    .navlinks{ display:none; }
-  }
-  @media (max-width:560px){
-    .skills-grid{ grid-template-columns:1fr; }
-    section{ padding:90px 0 20px; }
-    .contact-panel{ padding:34px 22px; }
-  }
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+        }
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
-    [data-reveal], [data-reveal="stagger"] > *{ opacity:1; transform:none; }
-  }
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
 
-  :focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
-</style>
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        /* Secciones */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: var(--dark);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .skill-list {
+            list-style: none;
+            color: var(--gray);
+        }
+
+        .skill-list li {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Experience */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 50%;
+            padding: 0 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 0;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .company {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .date {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .project-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .project-card p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .cert-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact */
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .contact-item a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            font-size: 2rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--darker);
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 2rem;
+            }
+
+            .timeline-item::before {
+                left: -10px !important;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-
-<div class="grid-bg"></div>
-<div class="glow"></div>
-<div id="progress"></div>
-
-<header>
-  <nav>
-    <div class="brand"><span class="dot-live"></span> fabian.bartolo <span style="color:var(--text-faint)">/ status</span></div>
-    <div class="navlinks">
-      <a href="#about" data-nav>Perfil</a>
-      <a href="#skills" data-nav>Stack</a>
-      <a href="#experience" data-nav>Experiencia</a>
-      <a href="#education" data-nav>Formación</a>
-      <a href="#contact" data-nav>Contacto</a>
-    </div>
-    <a class="nav-cta" href="mailto:bart.fabi2011@gmail.com">Contactar</a>
-  </nav>
-</header>
-
-<main>
-
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="status-pill" data-reveal><span class="dot-live"></span> DISPONIBLE PARA NUEVOS PROYECTOS</div>
-        <h1 data-reveal>Fabián Bartolo<br><span class="last">QA, infraestructura y observabilidad de sistemas.</span></h1>
-        <p class="lead" data-reveal>Ingeniero en Sistemas con más de 5 años detectando fallos antes de que le duelan al negocio: pruebas funcionales y de API, gestión de identidades sobre infraestructura crítica, y monitoreo con Dynatrace en el sector energético colombiano. Con base en Medellín, Colombia.</p>
-        <div class="hero-actions" data-reveal>
-          <a class="btn btn-primary" href="#experience">Ver experiencia</a>
-          <a class="btn btn-ghost" href="#contact">Hablemos de tu proyecto</a>
+    <!-- Navegación -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">FB</div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Sobre Mí</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experiencia</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#certifications">Certificaciones</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
-        <div class="stat-row" data-reveal="stagger">
-          <div class="stat"><div class="num" data-count="5" data-suffix="+">0</div><div class="label">años en tecnología</div></div>
-          <div class="stat"><div class="num" data-count="500" data-suffix="+">0</div><div class="label">identidades administradas</div></div>
-          <div class="stat"><div class="num" data-count="80" data-suffix="%">0</div><div class="label">reducción de incidentes diarios</div></div>
-          <div class="stat"><div class="num" data-count="100" data-suffix="%">0</div><div class="label">cumplimiento SLA, 7 meses</div></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 data-aos="fade-down">FABIÁN ANDRÉS BARTOLO ÁLVAREZ</h1>
+            <h2 data-aos="fade-up" data-aos-delay="200">QA Engineer & IT Infrastructure Specialist</h2>
+            <p data-aos="fade-up" data-aos-delay="400">
+                Ingeniero de Sistemas con 5+ años de experiencia en Observabilidad, Monitoreo, 
+                Infraestructura y Quality Assurance. Especialista en reducir incidentes y garantizar 
+                la calidad del software.
+            </p>
+            <div class="cta-buttons" data-aos="fade-up" data-aos-delay="600">
+                <a href="#contact" class="btn btn-primary">Contáctame</a>
+                <a href="#projects" class="btn btn-secondary">Ver Proyectos</a>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="panel chart-panel" data-reveal>
-        <div class="panel-head">
-          <span>observability / mttr.trend</span>
-          <div class="traffic"><span></span><span></span><span></span></div>
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title" data-aos="fade-up">Sobre Mí</h2>
+        <div class="about-content">
+            <div class="about-image" data-aos="zoom-in">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="about-text" data-aos="fade-left">
+                <h3>Perfil Profesional</h3>
+                <p>
+                    Ingeniero de Sistemas con más de 5 años de experiencia en el sector tecnológico, 
+                    especializado en Soporte TI, Infraestructura, IAM, Monitoreo y Observabilidad.
+                </p>
+                <p>
+                    Mi perfil híbrido me permite conectar el desarrollo, la calidad (QA) y la operación, 
+                    garantizando la estabilidad y eficiencia de los productos digitales en todas sus etapas.
+                </p>
+                <p>
+                    <strong>Fortalezas:</strong> Análisis de causa raíz (RCA), gestión de SLA, 
+                    troubleshooting avanzado, liderazgo de equipos y visión integral del ciclo de vida del software.
+                </p>
+                <div class="cta-buttons" style="margin-top: 2rem;">
+                    <a href="CV_Fabian_Bartolo_QA_ATS.pdf" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> Descargar CV
+                    </a>
+                </div>
+            </div>
         </div>
-        <svg viewBox="0 0 400 180" preserveAspectRatio="none">
-          <line x1="0" y1="45" x2="400" y2="45" stroke="var(--line)" stroke-width="1"/>
-          <line x1="0" y1="90" x2="400" y2="90" stroke="var(--line)" stroke-width="1"/>
-          <line x1="0" y1="135" x2="400" y2="135" stroke="var(--line)" stroke-width="1"/>
-          <path class="chart-line" d="M0,120 L40,110 L80,125 L120,80 L160,95 L200,55 L240,70 L280,40 L320,50 L360,25 L400,32"/>
-          <path class="chart-line-2" d="M0,150 L40,145 L80,150 L120,140 L160,142 L200,130 L240,132 L280,120 L320,122 L360,110 L400,112"/>
-        </svg>
-        <div class="panel-foot">
-          <span>Incidentes/día: 100 → 20</span>
-          <span>MTTR: −45%</span>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title" data-aos="fade-up">Competencias Técnicas</h2>
+        <div class="skills-grid">
+            <div class="skill-card" data-aos="fade-up">
+                <i class="fas fa-bug"></i>
+                <h3>QA & Testing</h3>
+                <ul class="skill-list">
+                    <li>Test Planning & Execution</li>
+                    <li>Functional Testing</li>
+                    <li>API Testing (Postman)</li>
+                    <li>Regression Testing</li>
+                    <li>Defect Life Cycle</li>
+                    <li>Jira & Azure DevOps</li>
+                </ul>
+            </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-code"></i>
+                <h3>Automatización</h3>
+                <ul class="skill-list">
+                    <li>Python</li>
+                    <li>Playwright</li>
+                    <li>Selenium</li>
+                    <li>pytest</li>
+                    <li>Page Object Model</li>
+                    <li>GitHub Actions</li>
+                </ul>
+            </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-server"></i>
+                <h3>Infraestructura</h3>
+                <ul class="skill-list">
+                    <li>Active Directory</li>
+                    <li>Microsoft Entra ID</li>
+                    <li>Windows Server</li>
+                    <li>Linux</li>
+                    <li>IAM & Identity Management</li>
+                    <li>ADManager Plus</li>
+                </ul>
+            </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-chart-line"></i>
+                <h3>Observabilidad</h3>
+                <ul class="skill-list">
+                    <li>Dynatrace</li>
+                    <li>Grafana</li>
+                    <li>Zabbix</li>
+                    <li>CloudWatch</li>
+                    <li>RCA & Incident Management</li>
+                    <li>SLA/SLO Management</li>
+                </ul>
+            </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-database"></i>
+                <h3>Bases de Datos</h3>
+                <ul class="skill-list">
+                    <li>SQL</li>
+                    <li>Oracle</li>
+                    <li>MySQL</li>
+                    <li>PostgreSQL</li>
+                    <li>SQL Server</li>
+                    <li>Data Validation</li>
+                </ul>
+            </div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Desarrollo</h3>
+                <ul class="skill-list">
+                    <li>HTML5/CSS3</li>
+                    <li>JavaScript</li>
+                    <li>React.js</li>
+                    <li>Node.js</li>
+                    <li>APIs REST</li>
+                    <li>Git/GitHub</li>
+                </ul>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="wrap">
-      <div class="kicker" data-reveal>cat perfil.md</div>
-      <h2 class="title" data-reveal>De helpdesk a garante de calidad y continuidad operativa.</h2>
-      <div class="about-grid">
-        <div class="about-text" data-reveal>
-          <p>Empecé en soporte técnico N1/N2 y hoy cubro el ciclo completo del software: <strong>diseño casos de prueba</strong>, valido <strong>APIs REST</strong>, administro <strong>identidades y accesos</strong> sobre infraestructura gubernamental crítica, y superviso <strong>servicios en producción</strong> con Dynatrace en tiempo real.</p>
-          <p>Ese recorrido transversal es mi ventaja: cuando encuentro un defecto, no solo lo reporto — entiendo si es de código, de datos, de permisos o de infraestructura, porque he trabajado en los cuatro frentes.</p>
-          <p>Actualmente formo nuevos analistas de QA en Frecuencia Gamer y sigo construyendo mi stack de automatización con <strong>Python, Playwright y pytest</strong>.</p>
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title" data-aos="fade-up">Experiencia Profesional</h2>
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-content">
+                    <h3>Docente de QA Software</h3>
+                    <div class="company">Frecuencia Gamer</div>
+                    <div class="date">Ago 2025 – Actualidad</div>
+                    <p>Formación técnica en Quality Assurance, Test Plans, Defect Life Cycle y automatización.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-content">
+                    <h3>Analista IAM</h3>
+                    <div class="company">Grupo Fractalia - Alcaldía de Medellín</div>
+                    <div class="date">Feb 2026 – Sep 2026</div>
+                    <p>Administración de 500+ identidades en Active Directory y Entra ID. 100% cumplimiento de SLA.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-content">
+                    <h3>Analista QA</h3>
+                    <div class="company">Experis Colombia - Cliente Carvajal</div>
+                    <div class="date">Nov 2025 – Dic 2025</div>
+                    <p>Pruebas funcionales, gestión de defectos en Azure DevOps, certificación de pases a producción.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-content">
+                    <h3>Analista QA / API Testing</h3>
+                    <div class="company">Digamma Studio S.A.S</div>
+                    <div class="date">Jul 2024 – Ago 2025</div>
+                    <p>Pruebas funcionales, API Testing con Postman, reducción de conflictos de código en 40%.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-content">
+                    <h3>Analista de Monitoreo</h3>
+                    <div class="company">XM - Sector Energético</div>
+                    <div class="date">Jul 2023 – Jul 2024</div>
+                    <p>Monitoreo de 200+ servicios críticos con Dynatrace. Reducción del 80% en incidentes.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-content">
+                    <h3>Consultor QA</h3>
+                    <div class="company">SQA - Software Quality Assurance</div>
+                    <div class="date">Nov 2022 – Ene 2023</div>
+                    <p>Estrategias de prueba, automatización en CI, reducción del 40% en tiempo de pruebas.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-content">
+                    <h3>QA Lead</h3>
+                    <div class="company">Indie Level Studio</div>
+                    <div class="date">Ene 2022 – Nov 2022</div>
+                    <p>Creación del área de QA desde cero para 4 proyectos de realidad virtual. Reducción de retrasos del 80% al 30%.</p>
+                </div>
+            </div>
         </div>
-        <div class="panel id-card" data-reveal>
-          <div class="row"><span>rol</span><span>QA Analyst · IT & Observability</span></div>
-          <div class="row"><span>ubicación</span><span>Medellín, Colombia</span></div>
-          <div class="row"><span>experiencia</span><span>5+ años</span></div>
-          <div class="row"><span>foco QA</span><span>3+ años</span></div>
-          <div class="row"><span>disponibilidad</span><span style="color:var(--teal)">Remoto / Híbrido</span></div>
-          <div class="row"><span>idiomas</span><span>Español (nativo), Inglés (A2→B1)</span></div>
-          <div class="row"><span>email</span><span>bart.fabi2011@gmail.com</span></div>
-          <div class="row"><span>teléfono</span><span>+57 301 380 1284</span></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title" data-aos="fade-up">Proyectos en Desarrollo</h2>
+        <div class="projects-grid">
+            <div class="project-card" data-aos="zoom-in">
+                <i class="fas fa-robot"></i>
+                <h3>API Testing Suite</h3>
+                <p>Suite de pruebas automatizadas para APIs REST con validación de schemas y tiempos de respuesta.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">pytest</span>
+                    <span class="tech-tag">Postman</span>
+                </div>
+            </div>
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fas fa-vr-cardboard"></i>
+                <h3>E2E Test Automation</h3>
+                <p>Framework de automatización E2E con Playwright para flujos críticos de aplicaciones web.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Playwright</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">POM</span>
+                </div>
+            </div>
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Quality Dashboard</h3>
+                <p>Dashboard de métricas de calidad integrando resultados de tests y observabilidad.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Grafana</span>
+                    <span class="tech-tag">Dynatrace</span>
+                    <span class="tech-tag">SQL</span>
+                </div>
+            </div>
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
+                <i class="fas fa-sync-alt"></i>
+                <h3>CI/CD Pipeline</h3>
+                <p>Integración de suites de prueba en pipelines automatizados con GitHub Actions.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">GitHub Actions</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Git</span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="wrap">
-      <div class="kicker" data-reveal>ls -la ./stack</div>
-      <h2 class="title" data-reveal>Un stack construido para encontrar dónde falla el sistema.</h2>
-      <div class="skills-grid" data-reveal="stagger">
-
-        <div class="skill-card">
-          <div class="head"><h3>QA & Testing</h3><span class="status-dot ok"></span></div>
-          <div class="status-line">status: operational</div>
-          <div class="tags">
-            <span class="tag">Test Planning</span><span class="tag">Test Cases</span><span class="tag">Regression</span>
-            <span class="tag">Smoke</span><span class="tag">Defect Life Cycle</span><span class="tag">Risk-Based</span>
-          </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://github.com/fabianbartolo" class="btn btn-primary" target="_blank">
+                <i class="fab fa-github"></i> Ver en GitHub
+            </a>
         </div>
+    </section>
 
-        <div class="skill-card">
-          <div class="head"><h3>API Testing</h3><span class="status-dot ok"></span></div>
-          <div class="status-line">status: operational</div>
-          <div class="tags">
-            <span class="tag">Postman</span><span class="tag">REST</span><span class="tag">JSON</span>
-            <span class="tag">HTTP Status</span><span class="tag">Integration</span>
-          </div>
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <h2 class="section-title" data-aos="fade-up">Certificaciones</h2>
+        <div class="cert-grid">
+            <div class="cert-card" data-aos="fade-up">
+                <i class="fas fa-certificate"></i>
+                <h3>Python: Lógica y Algoritmos</h3>
+                <p>66 horas - Alcaldía de Medellín</p>
+                <p style="color: var(--gray); font-size: 0.9rem;">2026</p>
+            </div>
+            <div class="cert-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-certificate"></i>
+                <h3>JavaScript</h3>
+                <p>Meta / Coursera</p>
+                <p style="color: var(--gray); font-size: 0.9rem;">Mar 2025</p>
+            </div>
+            <div class="cert-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-certificate"></i>
+                <h3>Problem Solving & Decision Making</h3>
+                <p>UC Irvine / Coursera</p>
+                <p style="color: var(--gray); font-size: 0.9rem;">Mar 2025</p>
+            </div>
+            <div class="cert-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-certificate"></i>
+                <h3>Scrum & Kanban Bootcamp</h3>
+                <p>40 horas - Universidad EAFIT</p>
+                <p style="color: var(--gray); font-size: 0.9rem;">Mar 2023</p>
+            </div>
+            <div class="cert-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-certificate"></i>
+                <h3>HTML5: Fundamentos Web</h3>
+                <p>12 horas - EducaciónIT</p>
+                <p style="color: var(--gray); font-size: 0.9rem;">2024</p>
+            </div>
+            <div class="cert-card" data-aos="fade-up" data-aos-delay="500">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>En Preparación</h3>
+                <p>ISTQB Foundation Level</p>
+                <p style="color: var(--gray); font-size: 0.9rem;">Azure AZ-900</p>
+            </div>
         </div>
+    </section>
 
-        <div class="skill-card">
-          <div class="head"><h3>Infraestructura & IAM</h3><span class="status-dot ok"></span></div>
-          <div class="status-line">status: operational</div>
-          <div class="tags">
-            <span class="tag">Active Directory</span><span class="tag">Entra ID</span><span class="tag">ADManager Plus</span>
-            <span class="tag">Windows Server</span><span class="tag">Linux</span>
-          </div>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title" data-aos="fade-up">Contacto</h2>
+        <div class="contact-content">
+            <p data-aos="fade-up" style="font-size: 1.2rem; color: var(--gray); margin-bottom: 2rem;">
+                ¿Interesado en trabajar juntos? ¡Contáctame!
+            </p>
+            <div class="contact-info" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:bart.fabi2011@gmail.com">bart.fabi2011@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+573013801284">+57 301 380 1284</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Medellín, Colombia</span>
+                </div>
+            </div>
+            <div class="social-links" data-aos="fade-up" data-aos-delay="400">
+                <a href="https://linkedin.com/in/fabian-andres-bartolo-tech" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/fabianbartolo" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:bart.fabi2011@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
         </div>
+    </section>
 
-        <div class="skill-card">
-          <div class="head"><h3>Observabilidad</h3><span class="status-dot ok"></span></div>
-          <div class="status-line">status: operational</div>
-          <div class="tags">
-            <span class="tag">Dynatrace</span><span class="tag">Grafana</span><span class="tag">Zabbix</span>
-            <span class="tag">RCA</span><span class="tag">MTTR</span><span class="tag">SLA/SLO</span>
-          </div>
-        </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Fabián Andrés Bartolo Álvarez. Todos los derechos reservados.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            Diseñado con <i class="fas fa-heart" style="color: var(--accent);"></i> y mucho café
+        </p>
+    </footer>
 
-        <div class="skill-card">
-          <div class="head"><h3>Bases de datos</h3><span class="status-dot ok"></span></div>
-          <div class="status-line">status: operational</div>
-          <div class="tags">
-            <span class="tag">SQL</span><span class="tag">Oracle</span><span class="tag">PostgreSQL</span>
-            <span class="tag">MySQL</span><span class="tag">Data Validation</span>
-          </div>
-        </div>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializar AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
 
-        <div class="skill-card">
-          <div class="head"><h3>Automatización</h3><span class="status-dot learning"></span></div>
-          <div class="status-line" style="color:var(--amber)">status: en formación activa</div>
-          <div class="tags">
-            <span class="tag">Python</span><span class="tag">Playwright</span><span class="tag">pytest</span>
-            <span class="tag">POM</span><span class="tag">Gherkin/BDD</span><span class="tag">GitHub Actions</span>
-          </div>
-        </div>
+        // Smooth scroll para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-      </div>
-    </div>
-  </section>
+        // Menú móvil
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="wrap">
-      <div class="kicker" data-reveal>tail -f experiencia.log</div>
-      <h2 class="title" data-reveal>Historial de despliegues.</h2>
+        menuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.background = 'rgba(10, 14, 39, 0.98)';
+            navLinks.style.padding = '2rem';
+        });
 
-      <div class="timeline" data-reveal>
-        <div class="timeline-progress" id="tlProgress"></div>
+        // Efecto de navegación al hacer scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 2px 20px rgba(0, 212, 255, 0.3)';
+            } else {
+                nav.style.boxShadow = '0 2px 20px rgba(0, 212, 255, 0.1)';
+            }
+        });
 
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">AGO 2026 — ACTUALIDAD</div>
-          <h3 class="tl-role">Docente de QA Software</h3>
-          <div class="tl-co">Frecuencia Gamer · Medellín</div>
-          <ul class="tl-bullets">
-            <li>Diseño y dicto formación técnica en Test Plans, Test Cases y Defect Life Cycle, con reporte de defectos en Jira.</li>
-            <li>Incorporo herramientas de IA y ejercicios orientados al mercado laboral colombiano actual.</li>
-          </ul>
-          <div class="tl-metric">▲ Estudiantes sin experiencia diseñan casos de prueba reales al finalizar el nivel 1</div>
-        </div>
+        // Animación de contador para métricas
+        const animateValue = (obj, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
 
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">FEB 2026 — SEP 2026</div>
-          <h3 class="tl-role">Analista de Gestión de Identidades y Accesos (IAM)</h3>
-          <div class="tl-co">Grupo Fractalia — Proyecto Alcaldía de Medellín</div>
-          <ul class="tl-bullets">
-            <li>Administré el ciclo de vida de +500 identidades sobre Active Directory, ADManager Plus y Microsoft Entra ID.</li>
-            <li>Resolví requerimientos e incidentes de acceso vía Aranda Service Desk, con documentación operativa propia.</li>
-          </ul>
-          <div class="tl-metric">▲ 100% de cumplimiento de SLA durante 7 meses, cero incidentes de seguridad escalados</div>
-        </div>
+        // Intersection Observer para animaciones adicionales
+        const observerOptions = {
+            threshold: 0.5
+        };
 
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">NOV 2025 — DIC 2025</div>
-          <h3 class="tl-role">Analista QA — Cliente Carvajal</h3>
-          <div class="tl-co">Experis Colombia (ManpowerGroup) · Remoto</div>
-          <ul class="tl-bullets">
-            <li>Diseñé y ejecuté casos de prueba funcionales priorizados por riesgo, en un proyecto con cronograma ajustado.</li>
-            <li>Gestión integral del Defect Life Cycle y Test Evidence en Azure DevOps Test Plans.</li>
-          </ul>
-          <div class="tl-metric">▲ 100% de módulos certificados antes de cada pase a producción, sin regresiones críticas</div>
-        </div>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">JUL 2024 — AGO 2025</div>
-          <h3 class="tl-role">Analista QA / API Testing / Desarrollador Front-End</h3>
-          <div class="tl-co">Digamma Studio S.A.S · Remoto</div>
-          <ul class="tl-bullets">
-            <li>Validé APIs REST con Postman e integración Frontend–Backend en más de 5 proyectos simultáneos.</li>
-            <li>Desarrollé interfaces con HTML5, CSS3, JavaScript y React.js, y di soporte funcional a las mismas.</li>
-          </ul>
-          <div class="tl-metric">▲ −40% en conflictos de código con branching estructurado en Git/GitHub/GitLab</div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">JUL 2023 — JUL 2024</div>
-          <h3 class="tl-role">Analista de Monitoreo y Observabilidad TI</h3>
-          <div class="tl-co">XM — Empleamos Temporales SAS · Híbrido</div>
-          <ul class="tl-bullets">
-            <li>Supervisé en tiempo real +200 servicios críticos del sector energético colombiano con Dynatrace.</li>
-            <li>Lideré análisis de causa raíz (RCA) en salas de crisis, bajo estándares ITIL.</li>
-          </ul>
-          <div class="tl-metric">▲ −80% en incidentes diarios (100→20) y −45% en MTTR</div>
-        </div>
-
-        <details class="tl-more">
-          <summary>▸ mostrar historial anterior (2018 — 2023)</summary>
-          <ul class="tl-bullets" style="padding-left:14px; list-style:none;">
-            <li><strong style="color:var(--text)">Consultor en Calidad de Software</strong> — SQA S.A. · Nov 2022–Ene 2023. Automatización de pruebas en pipelines CI, −30% en detección de defectos post-producción.</li>
-            <li><strong style="color:var(--text)">QA Lead</strong> — Indie Level Studio · Ene 2022–Nov 2022. Estructuré el área de QA desde cero para 4 proyectos de realidad virtual, lideré equipo de 6 personas.</li>
-            <li><strong style="color:var(--text)">Consultor QA / Validación de Datos</strong> — Sophos Solutions, cliente Tigo · May 2021–Ene 2022. Pruebas de integridad de datos con SQL Oracle a nivel nacional.</li>
-            <li><strong style="color:var(--text)">Analista de Calidad de Software</strong> — ARUS · Nov 2018–Feb 2019. Diseño y ejecución de casos de prueba desde documentos de requerimientos.</li>
-            <li><strong style="color:var(--text)">Soporte TI N1/N2</strong> — ARUS / SURA / EPM / Emtelco · 2015–2018. Base operacional del perfil: helpdesk, troubleshooting, atención de incidentes.</li>
-          </ul>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="wrap">
-      <div class="kicker" data-reveal>cat formacion.json</div>
-      <h2 class="title" data-reveal>Formación y certificaciones.</h2>
-
-      <div class="two-col" data-reveal="stagger">
-        <div class="list-card">
-          <h3><span class="status-dot ok"></span> Educación</h3>
-          <ul>
-            <li><div class="entry-title">Ingeniero en Sistemas</div><div class="entry-meta">IUSH — 2019</div></li>
-            <li><div class="entry-title">Especialización en Gestión y Seguridad de BD</div><div class="entry-meta">SENA — 2018</div></li>
-            <li><div class="entry-title">Diplomado en Lógica de Programación</div><div class="entry-meta">CESDE — 2022</div></li>
-            <li><div class="entry-title">Tecnólogo en Sistemas</div><div class="entry-meta">IUSH — 2010</div></li>
-          </ul>
-        </div>
-
-        <div class="list-card">
-          <h3><span class="status-dot ok"></span> Certificaciones</h3>
-          <ul>
-            <li><div class="entry-title">Python: Lógica y Algoritmos (66h)</div><div class="entry-meta">Alcaldía de Medellín / Cymetria — 2026</div></li>
-            <li><div class="entry-title">Programación con JavaScript</div><div class="entry-meta">Meta / Coursera — 2025</div></li>
-            <li><div class="entry-title">Metodologías Ágiles: Scrum & Kanban (40h)</div><div class="entry-meta">EAFIT / Comfama — 2023</div></li>
-            <li><div class="entry-title">Resolución de problemas y toma de decisiones</div><div class="entry-meta">UC Irvine / Coursera — 2025</div></li>
-            <li><div class="entry-title">ISTQB Foundation Level (CTFL)<span class="badge-pending">en preparación</span></div></li>
-            <li><div class="entry-title">Microsoft Azure Fundamentals (AZ-900)<span class="badge-pending">en preparación</span></div></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="two-col" style="margin-top:24px;" data-reveal="stagger">
-        <div class="list-card" style="grid-column:1 / -1;">
-          <h3><span class="status-dot ok"></span> Idiomas</h3>
-          <div class="lang-row">
-            <div class="lang-head"><span>Español</span><span>Nativo</span></div>
-            <div class="bar-track"><div class="bar-fill" data-width="100"></div></div>
-          </div>
-          <div class="lang-row">
-            <div class="lang-head"><span>Inglés</span><span>A2 → en progreso hacia B1</span></div>
-            <div class="bar-track"><div class="bar-fill" data-width="40"></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact-panel" data-reveal>
-        <div class="kicker" style="justify-content:center;">ping fabian.bartolo</div>
-        <h2>¿Necesitas a alguien que le pierda el miedo a los sistemas complejos?</h2>
-        <p>Disponible para posiciones de QA, soporte TI, infraestructura u observabilidad — remoto, híbrido o presencial en Medellín.</p>
-        <div class="contact-links">
-          <a class="clink" href="mailto:bart.fabi2011@gmail.com">✉ bart.fabi2011@gmail.com</a>
-          <a class="clink" href="tel:+573013801284">☎ +57 301 380 1284</a>
-          <a class="clink" href="https://linkedin.com/in/fabian-andres-bartolo-tech" target="_blank" rel="noopener">in/ LinkedIn</a>
-          <a class="clink" href="https://github.com/bart1301" target="_blank" rel="noopener">⌥ GitHub</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap">Fabián Andrés Bartolo Álvarez · Medellín, Colombia · © 2026</div>
-</footer>
-
-<script>
-// scroll progress bar
-const progress = document.getElementById('progress');
-function updateProgress(){
-  const h = document.documentElement;
-  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-  progress.style.width = scrolled + '%';
-}
-document.addEventListener('scroll', updateProgress, { passive:true });
-updateProgress();
-
-// nav active link
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('[data-nav]');
-const navObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    const link = document.querySelector('[data-nav][href="#'+entry.target.id+'"]');
-    if(!link) return;
-    if(entry.isIntersecting){
-      navLinks.forEach(l=>l.classList.remove('active'));
-      link.classList.add('active');
-    }
-  });
-}, { rootMargin: '-45% 0px -50% 0px' });
-sections.forEach(s=>navObserver.observe(s));
-
-// generic reveal on scroll
-const revealEls = document.querySelectorAll('[data-reveal]');
-const revealObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('is-visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold:0.15 });
-revealEls.forEach(el=>revealObserver.observe(el));
-
-// stagger children delay
-document.querySelectorAll('[data-reveal="stagger"]').forEach(group=>{
-  const children = group.children;
-  for(let i=0;i<children.length;i++){
-    children[i].style.transitionDelay = (i*90)+'ms';
-  }
-});
-
-// animated counters
-const counters = document.querySelectorAll('[data-count]');
-const counterObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      const el = entry.target;
-      const target = parseInt(el.getAttribute('data-count'),10);
-      const suffix = el.getAttribute('data-suffix') || '';
-      const dur = 1400;
-      const start = performance.now();
-      function tick(now){
-        const p = Math.min((now-start)/dur, 1);
-        const eased = 1 - Math.pow(1-p, 3);
-        el.textContent = Math.round(target*eased) + suffix;
-        if(p<1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold:0.5 });
-counters.forEach(c=>counterObserver.observe(c));
-
-// timeline draw progress
-const tlProgress = document.getElementById('tlProgress');
-const tlContainer = document.querySelector('.timeline');
-function updateTimeline(){
-  if(!tlContainer) return;
-  const rect = tlContainer.getBoundingClientRect();
-  const vh = window.innerHeight;
-  const total = rect.height;
-  let visible = vh*0.75 - rect.top;
-  visible = Math.max(0, Math.min(visible, total));
-  tlProgress.style.height = (visible/total*100) + '%';
-}
-document.addEventListener('scroll', updateTimeline, { passive:true });
-window.addEventListener('resize', updateTimeline);
-updateTimeline();
-
-const tlItems = document.querySelectorAll('.tl-item');
-const tlObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting) entry.target.classList.add('is-visible');
-  });
-}, { threshold:0.4 });
-tlItems.forEach(i=>tlObserver.observe(i));
-
-// language bars
-const bars = document.querySelectorAll('.bar-fill');
-const barObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.style.width = entry.target.getAttribute('data-width') + '%';
-      barObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold:0.5 });
-bars.forEach(b=>barObserver.observe(b));
-</script>
-
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
